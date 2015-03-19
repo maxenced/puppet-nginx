@@ -297,11 +297,11 @@ define nginx::resource::location (
     $content_real = template('nginx/vhost/locations/stub_status.erb')
   } elsif ($fastcgi != undef) {
     $content_real = template('nginx/vhost/locations/fastcgi.erb')
-  } elsif ($www_root != undef) {
-    $content_real = template('nginx/vhost/locations/directory.erb')
   } else {
-    $content_real = template('nginx/vhost/locations/empty.erb')
-  }
+    $content_real = template('nginx/vhost/locations/directory.erb')
+  } #else {
+    #$content_real = template('nginx/vhost/locations/empty.erb')
+    #}
 
   if $fastcgi != undef and !defined(File[$fastcgi_params]) {
     file { $fastcgi_params:
