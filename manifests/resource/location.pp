@@ -115,10 +115,7 @@ define nginx::resource::location (
   $vhost                = undef,
   $www_root             = undef,
   $autoindex            = undef,
-  $index_files          = [
-    'index.html',
-    'index.htm',
-    'index.php'],
+  $index_files          = [],
   $proxy                = undef,
   $proxy_redirect       = $nginx::config::proxy_redirect,
   $proxy_read_timeout   = $nginx::config::proxy_read_timeout,
