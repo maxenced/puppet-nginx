@@ -19,6 +19,7 @@ class nginx::config(
   $client_max_body_size           = $nginx::params::nx_client_max_body_size,
   $confd_purge                    = $nginx::params::nx_confd_purge,
   $conf_dir                       = $nginx::params::nx_conf_dir,
+  $ssl_dir                        = $nginx::params::nx_conf_dir,
   $conf_template                  = $nginx::params::nx_conf_template,
   $daemon_user                    = $nginx::params::nx_daemon_user,
   $events_use                     = $nginx::params::nx_events_use,

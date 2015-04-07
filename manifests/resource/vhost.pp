@@ -616,32 +616,32 @@ define nginx::resource::vhost (
 
     # Check if the file has been defined before creating the file to
     # avoid the error when using wildcard cert on the multiple vhosts
-    ensure_resource('file', "${nginx::config::conf_dir}/${cert}.crt", {
+    ensure_resource('file', "${nginx::config::ssl_dir}/${cert}.crt", {
       owner  => $nginx::config::daemon_user,
       mode   => '0444',
       source => $ssl_cert,
     })
-    ensure_resource('file', "${nginx::config::conf_dir}/${cert}.key", {
+    ensure_resource('file', "${nginx::config::ssl_dir}/${cert}.key", {
       owner  => $nginx::config::daemon_user,
       mode   => '0440',
       source => $ssl_key,
     })
     if ($ssl_dhparam != undef) {
-      ensure_resource('file', "${nginx::config::conf_dir}/${cert}.dh.pem", {
+      ensure_resource('file', "${nginx::config::ssl_dir}/${cert}.dh.pem", {
         owner  => $nginx::config::daemon_user,
         mode   => '0440',
         source => $ssl_dhparam,
       })
     }
     if ($ssl_stapling_file != undef) {
-      ensure_resource('file', "${nginx::config::conf_dir}/${cert}.ocsp.resp", {
+      ensure_resource('file', "${nginx::config::ssl_dir}/${cert}.ocsp.resp", {
         owner  => $nginx::config::daemon_user,
         mode   => '0440',
         source => $ssl_stapling_file,
       })
     }
     if ($ssl_trusted_cert != undef) {
-      ensure_resource('file', "${nginx::config::conf_dir}/${cert}.trusted.crt", {
+      ensure_resource('file', "${nginx::config::ssl_dir}/${cert}.trusted.crt", {
         owner  => $nginx::config::daemon_user,
         mode   => '0440',
         source => $ssl_trusted_cert,
