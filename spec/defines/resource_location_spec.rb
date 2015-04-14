@@ -626,24 +626,6 @@ describe 'nginx::resource::location' do
         it { should_not contain_concat__fragment(Digest::MD5.hexdigest("vhost1-800-rspec-test-ssl")) }
       end
 
-      context 'when auth_basic_user_file => true' do
-        let :params do { :auth_basic_user_file => '/path/to/file', :vhost => 'vhost1', :www_root => '/', } end
-
-        it { should contain_file("/etc/nginx/rspec-test_htpasswd") }
-      end
-
-      context 'when ensure => absent' do
-        let :params do {
-          :www_root             => '/',
-          :vhost                => 'vhost1',
-          :ensure               => 'absent',
-          :ssl                  => true,
-          :auth_basic_user_file => '/path/to/file',
-        } end
-
-        it { should contain_file("/etc/nginx/rspec-test_htpasswd").with_ensure('absent') }
-      end
-
       context "vhost missing" do
         let :params do {
           :www_root => '/',
