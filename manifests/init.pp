@@ -105,6 +105,10 @@ class nginx (
   $sites_available_mode           = $nginx::params::nx_sites_available_mode,
   $geo_mappings                   = {},
   $string_mappings                = {},
+  $set_real_ip_from               = [],
+  $real_ip_header                 = 'X-Forwarded-For',
+  $real_ip_recursive              = 'off'
+
 ) inherits nginx::params {
 
   include stdlib
@@ -121,6 +125,10 @@ class nginx (
   if (!is_string($events_use)) and ($events_use != false) {
     fail('$events_use must be a string or false.')
   }
+  validate_array($set_real_ip_from)
+  validate_string($real_ip_header)
+  validate_string($real_ip_recursive)
+
   validate_string($multi_accept)
   validate_string($package_name)
   validate_string($package_ensure)
@@ -241,6 +249,9 @@ class nginx (
     proxy_send_timeout             => $proxy_send_timeout,
     proxy_set_header               => $proxy_set_header,
     proxy_temp_path                => $proxy_temp_path,
+    set_real_ip_from               => $set_real_ip_from,
+    real_ip_header                 => $real_ip_header,
+    real_ip_recursive              => $real_ip_recursive,
     run_dir                        => $run_dir,
     sendfile                       => $sendfile,
     server_tokens                  => $server_tokens,

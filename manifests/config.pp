@@ -77,6 +77,9 @@ class nginx::config(
   $sites_available_owner          = $nginx::params::sites_available_owner,
   $sites_available_group          = $nginx::params::sites_available_group,
   $sites_available_mode           = $nginx::params::sites_available_mode,
+  $set_real_ip_from               = [],
+  $real_ip_header                 = 'X-Forwarded-For',
+  $real_ip_recursive              = 'off'
 ) inherits nginx::params {
 
   File {
@@ -106,6 +109,13 @@ class nginx::config(
     File["${conf_dir}/conf.mail.d"] {
       purge   => true,
       recurse => true,
+    }
+  }
+
+  if (($set_real_ip_from != []) and ($real_ip_header != '')) {
+    file { "${conf_dir}/conf.d/real_ip.conf":
+      ensure  => file,
+      content => template('nginx/conf.d/real_ip.erb')
     }
   }
 
