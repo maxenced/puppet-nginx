@@ -151,9 +151,7 @@ class nginx (
   if ($fastcgi_cache_path != false) {
         validate_string($fastcgi_cache_path)
   }
-  if (!validate_string($fastcgi_cache_levels)) {
-    fail('$fastcgi_cache_levels must be a string.')
-  }
+  validate_string($fastcgi_cache_levels)
   validate_string($fastcgi_cache_keys_zone)
   validate_string($fastcgi_cache_max_size)
   validate_string($fastcgi_cache_inactive)
