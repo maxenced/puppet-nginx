@@ -141,9 +141,7 @@ class nginx (
   if ($proxy_cache_path != false) {
     validate_string($proxy_cache_path)
   }
-  if (!is_integer($proxy_cache_levels)) {
-    fail('$proxy_cache_levels must be an integer.')
-  }
+  validate_re($proxy_cache_levels, '^[12](:[12])*$')
   validate_string($proxy_cache_keys_zone)
   validate_string($proxy_cache_max_size)
   validate_string($proxy_cache_inactive)
@@ -151,7 +149,7 @@ class nginx (
   if ($fastcgi_cache_path != false) {
         validate_string($fastcgi_cache_path)
   }
-  validate_string($fastcgi_cache_levels)
+  validate_re($fastcgi_cache_levels, '^[12](:[12])*$')
   validate_string($fastcgi_cache_keys_zone)
   validate_string($fastcgi_cache_max_size)
   validate_string($fastcgi_cache_inactive)
