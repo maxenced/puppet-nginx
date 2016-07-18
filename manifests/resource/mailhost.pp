@@ -73,7 +73,7 @@ define nginx::resource::mailhost (
   if !is_integer($listen_port) {
     fail('$listen_port must be an integer.')
   }
-  validate_re($ensure, '^(present|absent)$',
+  validate_re("${ensure}", '^(present|absent)$',
     "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
   validate_string($listen_ip)
   if ($listen_options != undef) {
@@ -95,7 +95,7 @@ define nginx::resource::mailhost (
   if ($ssl_port != undef) and (!is_integer($ssl_port)) {
     fail('$ssl_port must be an integer.')
   }
-  validate_re($starttls, '^(on|only|off)$',
+  validate_re("${starttls}", '^(on|only|off)$',
     "${starttls} is not supported for starttls. Allowed values are 'on', 'only' and 'off'.")
   if ($protocol != undef) {
     validate_string($protocol)

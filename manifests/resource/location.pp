@@ -160,7 +160,7 @@ define nginx::resource::location (
     notify => Class['nginx::service'],
   }
 
-  validate_re($ensure, '^(present|absent)$',
+  validate_re("${ensure}", '^(present|absent)$',
     "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
   validate_string($location)
   if ($vhost != undef) {

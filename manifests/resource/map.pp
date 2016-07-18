@@ -49,11 +49,11 @@ define nginx::resource::map (
   $hostnames  = false
 ) {
   validate_string($string)
-  validate_re($string, '^.{2,}$',
+  validate_re("${string}", '^.{2,}$',
     "Invalid string value [${string}]. Expected a minimum of 2 characters.")
   validate_hash($mappings)
   validate_bool($hostnames)
-  validate_re($ensure, '^(present|absent)$',
+  validate_re("${ensure}", '^(present|absent)$',
     "Invalid ensure value '${ensure}'. Expected 'present' or 'absent'")
   if ($default != undef) { validate_string($default) }
 

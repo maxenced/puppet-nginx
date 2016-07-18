@@ -65,7 +65,7 @@ define nginx::resource::geo (
 
   validate_hash($networks)
   validate_bool($ranges)
-  validate_re($ensure, '^(present|absent)$',
+  validate_re("${ensure}", '^(present|absent)$',
     "Invalid ensure value '${ensure}'. Expected 'present' or 'absent'")
   if ($default != undef) { validate_string($default) }
   if ($address != undef) { validate_string($address) }

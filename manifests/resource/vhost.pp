@@ -251,7 +251,7 @@ define nginx::resource::vhost (
   $mode                   = $nginx::config::global_mode,
 ) {
 
-  validate_re($ensure, '^(present|absent)$',
+  validate_re("${ensure}", '^(present|absent)$',
     "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
   validate_string($listen_ip)
   if !is_integer($listen_port) {
@@ -432,7 +432,7 @@ define nginx::resource::vhost (
 
   validate_string($owner)
   validate_string($group)
-  validate_re($mode, '^\d{4}$',
+  validate_re("${mode}", '^\d{4}$',
     "${mode} is not valid. It should be 4 digits (0644 by default).")
 
   # Variables
