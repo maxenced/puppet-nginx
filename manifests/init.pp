@@ -108,7 +108,8 @@ class nginx (
   $string_mappings                = {},
   $set_real_ip_from               = [],
   $real_ip_header                 = 'X-Forwarded-For',
-  $real_ip_recursive              = 'off'
+  $real_ip_recursive              = 'off',
+  $nginx_cfg_prepend              = false
 
 ) inherits nginx::params {
 
@@ -192,6 +193,12 @@ class nginx (
   validate_hash($string_mappings)
   validate_hash($geo_mappings)
 
+  if ($nginx_cfg_prepend != false) {
+    if !(is_hash($nginx_cfg_prepend) or is_array($nginx_cfg_prepend)) {
+      fail('$nginx_cfg_prepend must be either a hash or array')
+    }
+  }
+
   class { 'nginx::package':
     package_name   => $package_name,
     package_source => $package_source,
@@ -268,6 +275,7 @@ class nginx (
     sites_available_owner          => $sites_available_owner,
     sites_available_group          => $sites_available_group,
     sites_available_mode           => $sites_available_mode,
+    nginx_cfg_prepend              => $nginx_cfg_prepend,
     require                        => Class['nginx::package'],
     notify                         => Class['nginx::service'],
   }

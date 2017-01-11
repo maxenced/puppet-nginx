@@ -78,6 +78,7 @@ class nginx::config(
   $sites_available_owner          = $::nginx::params::sites_available_owner,
   $sites_available_group          = $::nginx::params::sites_available_group,
   $sites_available_mode           = $::nginx::params::sites_available_mode,
+  $nginx_cfg_prepend              = $::nginx::nginx_cfg_prepend,
   $set_real_ip_from               = [],
   $real_ip_header                 = 'X-Forwarded-For',
   $real_ip_recursive              = 'off'
