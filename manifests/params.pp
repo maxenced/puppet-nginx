@@ -150,12 +150,12 @@ class nginx::params {
   $manage_repo    = true
 
   # Specific owner for sites-available directory
-  $sites_available_owner = 'root'
-  $sites_available_group = $root_group
-  $sites_available_mode  = '0644'
+  $nx_sites_available_owner = 'root'
+  $nx_sites_available_group = $root_group
+  $nx_sites_available_mode  = '0644'
 
   # Owner for all other files
-  $global_owner = 'root'
-  $global_group = $root_group
-  $global_mode  = '0644'
+  $nx_global_owner = 'root'
+  $nx_global_group = $root_group
+  $nx_global_mode  = '0644'
 }
